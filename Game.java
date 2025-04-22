@@ -1,7 +1,3 @@
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.*;
 
 public class Game {
     public static void main(String[] args) {
@@ -20,6 +16,7 @@ public class Game {
         NPC benX = new NPC("benX", 100, "d");
         //System.out.println(benX);
         //System.out.println(" ");
+        NPC noah = new NPC("noah", 100, "e");
         //^^^ Create different NPCs ^^^ (TEMP FORMAT)
 
         brad.setloveStat(75);
