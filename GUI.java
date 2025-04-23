@@ -20,18 +20,12 @@ class GameGUI {
          backgroundPanel.setBounds(0, 0, 800, 800); // Cover the entire frame
          frame.setContentPane(backgroundPanel);
 
-
-
+        //Title
         JLabel titleLabel = new JLabel("Syntax Error Love Overflow", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Comic Sans MS", Font.BOLD, 50)); // Customize the font
         titleLabel.setForeground(Color.WHITE); // Set text color
         titleLabel.setBounds(0, 100, 800, 100); // Position the title
         frame.add(titleLabel);
-
-        // Create and position the button
-        JButton button = new JButton("Click Me!");
-        button.setBounds(300, 600, 200, 50); // x, y, width, height
-        frame.getContentPane().add(button);
 
         // Subtitle Label with a playful font
         JLabel subtitleLabel = new JLabel("A Romantic Adventure Awaits!", SwingConstants.CENTER);
@@ -40,21 +34,43 @@ class GameGUI {
         subtitleLabel.setBounds(0, 200, 800, 50);
         frame.add(subtitleLabel);
         
+        // Add components to the background panel instead of the frame
+        backgroundPanel.setLayout(null); // Use absolute positioning for the panel
 
-        // Add action listener to the button
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.getContentPane().removeAll();
+        // Add a "Start Game" button
+        customButton startButton = new customButton(
+            "Start Game!", 
+            300, 375, 200, 50, 
+            e -> {
+                backgroundPanel.removeAll();
+                JLabel label = new JLabel("Game Started!", SwingConstants.CENTER);
+                label.setBounds(200, 375, 400, 50);
+                backgroundPanel.add(label);
+        
+                // Add a "Somewhere" button
+                customButton somewhereButton = new customButton(
+                    "Somewhere", 
+                    300, 450, 200, 50, 
+                    event -> {
+                        backgroundPanel.removeAll();
+                        JLabel somewhereLabel = new JLabel("Somewhere!", SwingConstants.CENTER);
+                        somewhereLabel.setBounds(200, 375, 400, 50);
+                        backgroundPanel.add(somewhereLabel);
+                        backgroundPanel.revalidate();
+                        backgroundPanel.repaint();
+                    }
+                );
+                backgroundPanel.add(somewhereButton);
+        
+                backgroundPanel.revalidate();
+                backgroundPanel.repaint();
+                    }
+                );
+                backgroundPanel.add(startButton);
 
-                JLabel label = new JLabel("Button Clicked!", SwingConstants.CENTER);
-                label.setBounds(200, 300, 400, 50); // Set bounds for the label
-                frame.getContentPane().add(label);
 
-                frame.revalidate();
-                frame.repaint();
-            }
-        });
+
+
 
         // Set the window to be visible
         frame.setVisible(true);
