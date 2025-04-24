@@ -1,5 +1,5 @@
 public class NPC {
-    String name;
+    static String name;
     int loveStat = 0;
     String personality;
     String relation; //changes relative to the loveStat num 
@@ -12,7 +12,7 @@ public class NPC {
         updateRelation();
     }
 
-    public String getName(){
+    public static String getName(){
         return name;
     }
     private void setName(String name){

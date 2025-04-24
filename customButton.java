@@ -1,5 +1,6 @@
-import javax.swing.*;
 import java.awt.event.ActionListener;
+import javax.swing.*;
+
 public class customButton extends JButton {
     public customButton(String text, int x, int y, int width, int height, ActionListener action) {
         super(text); // Set the button's text
