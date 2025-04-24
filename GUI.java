@@ -37,6 +37,7 @@ class GameGUI {
         // Add components to the background panel instead of the frame
         backgroundPanel.setLayout(null); // Use absolute positioning for the panel
 
+        //Center the button (800 - x)/2 
         // Add a "Start Game" button
         customButton startButton = new customButton(
             "Start Game!", 
@@ -48,20 +49,34 @@ class GameGUI {
                 backgroundPanel.add(label);
         
                 // Add a "Somewhere" button
-                customButton somewhereButton = new customButton(
-                    "Somewhere", 
-                    300, 450, 200, 50, 
+                customButton tellMeMoreButton = new customButton(
+                    "Tell more about you!", 
+                    100, 561, 200, 50, 
                     event -> {
                         backgroundPanel.removeAll();
-                        JLabel somewhereLabel = new JLabel("Somewhere!", SwingConstants.CENTER);
+                        JLabel somewhereLabel = new JLabel("more about char", SwingConstants.CENTER);
                         somewhereLabel.setBounds(200, 375, 400, 50);
                         backgroundPanel.add(somewhereLabel);
                         backgroundPanel.revalidate();
                         backgroundPanel.repaint();
                     }
                 );
-                backgroundPanel.add(somewhereButton);
-        
+
+                customButton diffCharButton = new customButton(
+                    "New character greeting", 
+                    500, 561, 200, 50, 
+                    event -> {
+                        backgroundPanel.removeAll();
+                        JLabel somewhereLabel = new JLabel("New character!", SwingConstants.CENTER);
+                        somewhereLabel.setBounds(200, 375, 400, 50);
+                        backgroundPanel.add(somewhereLabel);
+                        backgroundPanel.revalidate();
+                        backgroundPanel.repaint();
+                    }
+                );
+                backgroundPanel.add(tellMeMoreButton);
+                backgroundPanel.add(diffCharButton);
+
                 backgroundPanel.revalidate();
                 backgroundPanel.repaint();
                     }

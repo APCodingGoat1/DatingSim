@@ -17,6 +17,8 @@ public class Game {
         //System.out.println(benX);
         //System.out.println(" ");
         NPC noah = new NPC("noah", 100, "e");
+        NPC steven = new NPC("steven", 100, "e");
+        NPC caden = new NPC("caden", 100, "e");
         //^^^ Create different NPCs ^^^ (TEMP FORMAT)
 
         brad.setloveStat(75);
