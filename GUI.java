@@ -62,11 +62,11 @@ class GameGUI {
         if (currentCharacterIndex >= dialogue.getCharacters().size() - 1) {
             // If all characters have been shown, display a message or reset
             backgroundPanel.removeAll();
-            JLabel endLabel = new JLabel("No more characters to meet!", SwingConstants.CENTER);
+            JLabel endLabel = new JLabel("No more characters to meet!", SwingConstants.CENTER); //CHANGE LATER
             endLabel.setBounds(200, 375, 400, 50);
             backgroundPanel.add(endLabel);
     
-            // Optionally, add a "Restart" button
+            // Optionally, add a "Restart" button - CHANGE LATER
             customButton restartButton = new customButton(
                 "Restart",
                 300, 450, 200, 50,
@@ -99,6 +99,7 @@ class GameGUI {
             100, 561, 200, 50,
         e -> {
             backgroundPanel.removeAll();
+            //CREATE ANOTHER METhOD THAT GOES TO A DIFFERENT DIALOGUE OPTION
             JLabel moreCharLabel = new JLabel("More about " + characterName, SwingConstants.CENTER);
             moreCharLabel.setBounds(200, 375, 400, 50);
             backgroundPanel.add(moreCharLabel);
