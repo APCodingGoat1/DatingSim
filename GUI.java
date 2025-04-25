@@ -35,6 +35,11 @@ class GameGUI {
         // Add components to the background panel instead of the frame
         backgroundPanel.setLayout(null); // Use absolute positioning for the panel
 
+        //DIALOGUE
+        Dialogue dialogue = new Dialogue();
+
+
+
         //Center the button (800 - x)/2 
         // Add a "Start Game" button
         customButton startButton = new customButton(
@@ -42,7 +47,8 @@ class GameGUI {
             300, 375, 200, 50, 
             e -> {
                 backgroundPanel.removeAll();
-                JLabel label = new JLabel(Dialogue.greetingBrad(), SwingConstants.CENTER); // OUTPUT
+                String greetingB = dialogue.greetingBrad();
+                JLabel label = new JLabel(greetingB, SwingConstants.CENTER); // OUTPUT
                 label.setBounds(200, 375, 400, 50);
                 backgroundPanel.add(label);
         
@@ -61,17 +67,19 @@ class GameGUI {
                 );
 
                 customButton diffCharButton = new customButton(
-                    "New character greeting", 
+                    "Meet a different character", 
                     500, 561, 200, 50, 
                     event -> {
                         backgroundPanel.removeAll();
-                        JLabel newCharLabel = new JLabel("New character!", SwingConstants.CENTER);
+                        String greetingN = dialogue.normGreeting();
+                        JLabel newCharLabel = new JLabel(greetingN, SwingConstants.CENTER);
                         newCharLabel.setBounds(200, 375, 400, 50);
                         backgroundPanel.add(newCharLabel);
                         backgroundPanel.revalidate();
                         backgroundPanel.repaint();
                     }
                 );
+                
                 backgroundPanel.add(tellMeMoreButton);
                 backgroundPanel.add(diffCharButton);
 
@@ -81,7 +89,26 @@ class GameGUI {
                 );
                 backgroundPanel.add(startButton);
 
+//IDEA: create a for loop that presents two options tell more and new char. if tell me more is pressed, it will 
+//remove all and add a new label with the new dialogue. if new char is pressed, it will remove all and add a new label with the new dialogue.
+                // Add a "Quit" button
+                customButton quitButton = new customButton(
+                    "Quit", 
+                    300, 450, 200, 50, 
+                    e -> System.exit(0)
+                );
+                backgroundPanel.add(quitButton);
 
+                // Add a "Settings" button
+                customButton settingsButton = new customButton(
+                    "Settings", 
+                    300, 525, 200, 50, 
+                    e -> {
+                        // Placeholder for settings action
+                        JOptionPane.showMessageDialog(frame, "Settings are not available yet.");
+                    }
+                );
+                backgroundPanel.add(settingsButton);
 
 
 

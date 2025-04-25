@@ -1,9 +1,9 @@
 import java.util.Random;
-public class Dialogue extends GameGUI {
-    private Random random;
+public class Dialogue {
+    private static final Random random = new Random();
 
     public Dialogue() {
-        random = new Random();
+        
     }
 
     public String normGreeting() {
@@ -24,4 +24,5 @@ public class Dialogue extends GameGUI {
         };
         return greetingBrad[random.nextInt(greetingBrad.length)];
     }
+    
 }
