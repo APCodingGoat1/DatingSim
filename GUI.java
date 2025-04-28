@@ -1,12 +1,32 @@
 import java.awt.*;
 import javax.swing.*;
-import java.util.ArrayList;
 
 class GameGUI {
     private JFrame frame;
     private JPanel backgroundPanel;
     private Dialogue dialogue;
     private int currentCharacterIndex;
+
+
+    private void displayImage(String imagePath) {
+        // Clear the panel
+        backgroundPanel.removeAll();
+    
+        // Load the image
+        ImageIcon imageIcon = new ImageIcon(imagePath); // Path to the image file
+        JLabel imageLabel = new JLabel(imageIcon); // Create a JLabel with the image
+    
+        // Set the size and position of the image
+        imageLabel.setBounds(200, 200, 400, 400); // Adjust the position and size as needed
+    
+        // Add the image to the panel
+        backgroundPanel.add(imageLabel);
+    
+        // Refresh the panel
+        backgroundPanel.revalidate();
+        backgroundPanel.repaint();
+    }
+
 
     public GameGUI() {
         // Initialize the JFrame
@@ -43,23 +63,43 @@ class GameGUI {
         dialogue = new Dialogue();
 
         //Center the button (800 - x)/2 
-        
-        if (currentCharacterIndex >= dialogue.getCharacters().size() - 1) {
-            currentCharacterIndex = -1; // Initialize the character index
-        }
+
+        currentCharacterIndex = (int) (Math.random() * dialogue.getGreetingsAll().size()); // Randomly select a character
         customButton startButton = new customButton(
             "Start Game", 300, 375, 200, 50,
         e -> updateCharacterOptions()
     );
     backgroundPanel.add(startButton);
 
+
+    
+    // Add a "Quit" button
+    customButton quitButton = new customButton(
+        "Quit", 
+        300, 450, 200, 50, 
+        e -> System.exit(0)
+    );
+    backgroundPanel.add(quitButton);
+
+    // Add a "Settings" button
+    customButton settingsButton = new customButton(
+        "Settings", 
+        300, 525, 200, 50, 
+        e -> {
+            // Placeholder for settings action
+            JOptionPane.showMessageDialog(frame, "Settings are not available yet.");
+        }
+    );
+    backgroundPanel.add(settingsButton);
+
         // Set the window to be visible
         frame.setVisible(true);
     }
 
+
     private void updateCharacterOptions() {
         // Check if there are any characters left to display
-        if (currentCharacterIndex >= dialogue.getCharacters().size() - 1) {
+        if (currentCharacterIndex >= dialogue.getGreetingsAll().size() - 1) {
             // If all characters have been shown, display a message or reset
             backgroundPanel.removeAll();
             JLabel endLabel = new JLabel("No more characters to meet!", SwingConstants.CENTER);
@@ -84,13 +124,27 @@ class GameGUI {
         currentCharacterIndex++;
 
         // Get the current character's data
-        String[] character = dialogue.getCharacters().get(currentCharacterIndex);
-        String characterName = character[0];
-        String greeting = character[1 + (int) (Math.random() * (character.length - 1))]; // Random greeting
+        String[] UIgreetings = dialogue.getGreetingsAll().get(currentCharacterIndex);
+        String characterName = UIgreetings[0];
+        String greeting = UIgreetings[1 + (int) (Math.random() * (UIgreetings.length - 1))]; // Random greeting
 
         backgroundPanel.removeAll();
-        JLabel greetingLabel = new JLabel(greeting, SwingConstants.CENTER);
-        greetingLabel.setBounds(200, 375, 400, 50);
+
+        String[] imagePaths = dialogue.getCharacterImages(characterName); // Get the image paths
+        // Display the character's image
+        String greetingImage = imagePaths[1];
+        
+        ImageIcon originalIcon = new ImageIcon(greetingImage); // Load the original image  
+        Image scaledImage = originalIcon.getImage().getScaledInstance(600, 450, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage); // Create a new ImageIcon with the scaled image
+        
+        JLabel imageLabel = new JLabel(scaledIcon);
+        imageLabel.setBounds(100, 25, 600, 450); 
+        backgroundPanel.add(imageLabel);
+
+        //Character greeting
+        JLabel greetingLabel = new JLabel(characterName + ": " + greeting, SwingConstants.CENTER);
+        greetingLabel.setBounds(200, 475, 400, 50);
         backgroundPanel.add(greetingLabel);
 
         // Add "Tell Me More" button
@@ -98,19 +152,14 @@ class GameGUI {
             "Tell me more about " + characterName,
             100, 561, 200, 50,
         e -> {
-            backgroundPanel.removeAll();
-            JLabel moreCharLabel = new JLabel("More about " + characterName, SwingConstants.CENTER);
-            moreCharLabel.setBounds(200, 375, 400, 50);
-            backgroundPanel.add(moreCharLabel);
-            backgroundPanel.revalidate();
-            backgroundPanel.repaint();
+            tellMeMoreButton();
         }
     );
     // Add "Meet a Different Character" button
     customButton diffCharButton = new customButton(
         "Meet a different character",
         500, 561, 200, 50,
-        e -> updateCharacterOptions() // Move to the next character
+        e -> updateCharacterOptions() // Move to the next character - recursion?
     );
 
     backgroundPanel.add(tellMeMoreButton);
@@ -118,80 +167,101 @@ class GameGUI {
     backgroundPanel.revalidate();
     backgroundPanel.repaint();
     }
-}
 
 
-/*
- *  // Add a "Start Game" button
-        customButton startButton = new customButton(
-            "Start Game", 
-            300, 375, 200, 50, 
-            e -> {
-                backgroundPanel.removeAll();
-                String greetingB = dialogue.greetingBrad();
-                JLabel label = new JLabel(greetingB, SwingConstants.CENTER); // OUTPUT
-                label.setBounds(200, 375, 400, 50);
-                backgroundPanel.add(label);
+
+    private void tellMeMoreButton() {
+        String[] UItellmeMore = dialogue.getTellMeMoreAll().get(currentCharacterIndex);
+        String characterName = UItellmeMore[0];
+        String tellmeMore = dialogue.getTellMeMoreData(characterName);
+
+        backgroundPanel.removeAll();
+        JLabel tellMeMoreLabel = new JLabel(characterName + ": " + tellmeMore, SwingConstants.CENTER);
+        tellMeMoreLabel.setBounds(200, 475, 400, 50);
+        backgroundPanel.add(tellMeMoreLabel);
+
+        String[] imagePaths = dialogue.getCharacterImages(characterName); // Get the image paths
+        // Display the character's image
+        String tellMeMoreImage = imagePaths[2];
         
-                // Add a "tellMemore" button
-                customButton tellMeMoreButton = new customButton(
-                    "Tell me more about you!", 
-                    100, 561, 200, 50, 
-                    event -> {
-                        backgroundPanel.removeAll();
-                        JLabel moreCharLabel = new JLabel("more about char", SwingConstants.CENTER);
-                        moreCharLabel.setBounds(200, 375, 400, 50);
-                        backgroundPanel.add(moreCharLabel);
-                        backgroundPanel.revalidate();
-                        backgroundPanel.repaint();
-                    }
-                );
+        ImageIcon originalIcon = new ImageIcon(tellMeMoreImage); // Load the original image  
+        Image scaledImage = originalIcon.getImage().getScaledInstance(600, 450, Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(scaledImage); // Create a new ImageIcon with the scaled image
+        
+        JLabel imageLabel = new JLabel(scaledIcon);
+        imageLabel.setBounds(100, 25, 600, 450); 
+        backgroundPanel.add(imageLabel);
 
-                customButton diffCharButton = new customButton(
-                    "Meet a different character", 
-                    500, 561, 200, 50, 
-                    event -> {
-                        backgroundPanel.removeAll();
-                        String greetingN = dialogue.normGreeting();
-                        JLabel newCharLabel = new JLabel(greetingN, SwingConstants.CENTER);
-                        newCharLabel.setBounds(200, 375, 400, 50);
-                        backgroundPanel.add(newCharLabel);
-                        backgroundPanel.revalidate();
-                        backgroundPanel.repaint();
-                    }
-                );
-                
-                backgroundPanel.add(tellMeMoreButton);
-                backgroundPanel.add(diffCharButton);
+        String[] options = dialogue.getTellMeMoreOptionsLabels(currentCharacterIndex); // Array of button labels
+        String[] responses = dialogue.getTellMeMoreResponses(currentCharacterIndex); // Array of responses
 
-                backgroundPanel.revalidate();
-                backgroundPanel.repaint();
-                    }
-                );
-                backgroundPanel.add(startButton);
- */
-       
+        customButton option1 = new customButton(
+        options[1],
+        150, 550, 200, 50,
+        e -> {
+            backgroundPanel.removeAll();
+            JLabel response1Label = new JLabel(responses[1], SwingConstants.CENTER);
+            response1Label.setBounds(200, 425, 400, 50);
+            backgroundPanel.add(response1Label);
+            backgroundPanel.revalidate();
+            backgroundPanel.repaint();
+        }
+    );
 
-//IDEA: create a for loop that presents two options tell more and new char. if tell me more is pressed, it will 
-//remove all and add a new label with the new dialogue. if new char is pressed, it will remove all and add a new label with the new dialogue.
-                
-/*
- * // Add a "Quit" button
-                customButton quitButton = new customButton(
-                    "Quit", 
-                    300, 450, 200, 50, 
-                    e -> System.exit(0)
-                );
-                backgroundPanel.add(quitButton);
+        customButton option2 = new customButton(
+        options[2],
+        450, 550, 200, 50,
+        e -> {
+            backgroundPanel.removeAll();
+            JLabel response2Label = new JLabel(responses[2], SwingConstants.CENTER);
+            response2Label.setBounds(200, 375, 400, 50);
+            backgroundPanel.add(response2Label);
+            backgroundPanel.revalidate();
+            backgroundPanel.repaint();
+        }
+    );
 
-                // Add a "Settings" button
-                customButton settingsButton = new customButton(
-                    "Settings", 
-                    300, 525, 200, 50, 
-                    e -> {
-                        // Placeholder for settings action
-                        JOptionPane.showMessageDialog(frame, "Settings are not available yet.");
-                    }
-                );
-                backgroundPanel.add(settingsButton);
- */
+        customButton option3 = new customButton(
+        options[3],
+        150, 650, 200, 50,
+        e -> {
+            backgroundPanel.removeAll();
+            JLabel response3Label = new JLabel(responses[3], SwingConstants.CENTER);
+            response3Label.setBounds(200, 375, 400, 50);
+            backgroundPanel.add(response3Label);
+            backgroundPanel.revalidate();
+            backgroundPanel.repaint();
+        }
+    );
+
+        customButton option4 = new customButton(
+        options[4],
+        450, 650, 200, 50,
+        e -> {
+            backgroundPanel.removeAll();
+            JLabel response4Label = new JLabel(responses[4], SwingConstants.CENTER);
+            response4Label.setBounds(200, 375, 400, 50);
+            backgroundPanel.add(response4Label);
+            backgroundPanel.revalidate();
+            backgroundPanel.repaint();
+        }
+    );
+
+
+
+        backgroundPanel.add(option1);
+        backgroundPanel.add(option2);
+        backgroundPanel.add(option3);
+        backgroundPanel.add(option4);
+
+        backgroundPanel.revalidate();
+        backgroundPanel.repaint();
+    }
+
+
+
+
+
+
+
+}
