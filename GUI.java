@@ -1,6 +1,5 @@
 import java.awt.*;
 import javax.swing.*;
-import java.util.ArrayList;
 
 class GameGUI {
     private JFrame frame;
@@ -9,6 +8,9 @@ class GameGUI {
     private int currentCharacterIndex;
 
     public GameGUI() {
+        //Center the button (800 - x)/2
+
+
         // Initialize the JFrame
         frame = new JFrame("UwU Syntax Error Love Overflow UwU");
         frame.setSize(800, 800);  // Set the size of the window
@@ -42,9 +44,7 @@ class GameGUI {
         //DIALOGUE
         dialogue = new Dialogue();
 
-        //Center the button (800 - x)/2 
-        
-        if (currentCharacterIndex >= dialogue.getCharacters().size() - 1) {
+        if (currentCharacterIndex >= dialogue.getGreetingsAll().size() - 1) {
             currentCharacterIndex = -1; // Initialize the character index
         }
         customButton startButton = new customButton(
@@ -53,13 +53,32 @@ class GameGUI {
     );
     backgroundPanel.add(startButton);
 
+     // Add a "Quit" button
+     customButton quitButton = new customButton(
+        "Quit", 
+        300, 450, 200, 50, 
+        e -> System.exit(0)
+    );
+    backgroundPanel.add(quitButton);
+
+    // Add a "Settings" button
+    customButton settingsButton = new customButton(
+        "Settings", 
+        300, 525, 200, 50, 
+        e -> {
+            // Placeholder for settings action
+            JOptionPane.showMessageDialog(frame, "penis");
+        }
+    );
+    backgroundPanel.add(settingsButton);
+
         // Set the window to be visible
         frame.setVisible(true);
     }
 
     private void updateCharacterOptions() {
         // Check if there are any characters left to display
-        if (currentCharacterIndex >= dialogue.getCharacters().size() - 1) {
+        if (currentCharacterIndex >= dialogue.getGreetingsAll().size() - 1) {
             // If all characters have been shown, display a message or reset
             backgroundPanel.removeAll();
             JLabel endLabel = new JLabel("No more characters to meet!", SwingConstants.CENTER); //CHANGE LATER
@@ -84,12 +103,12 @@ class GameGUI {
         currentCharacterIndex++;
 
         // Get the current character's data
-        String[] character = dialogue.getCharacters().get(currentCharacterIndex);
-        String characterName = character[0];
-        String greeting = character[1 + (int) (Math.random() * (character.length - 1))]; // Random greeting
+        String[] UIgreeting = dialogue.getGreetingsAll().get(currentCharacterIndex);
+        String characterName = UIgreeting[0];
+        String greeting = UIgreeting[1 + (int) (Math.random() * (UIgreeting.length - 1))]; // Random greeting
 
         backgroundPanel.removeAll();
-        JLabel greetingLabel = new JLabel(greeting, SwingConstants.CENTER);
+        JLabel greetingLabel = new JLabel(characterName + ": " + greeting, SwingConstants.CENTER);
         greetingLabel.setBounds(200, 375, 400, 50);
         backgroundPanel.add(greetingLabel);
 
@@ -98,13 +117,7 @@ class GameGUI {
             "Tell me more about " + characterName,
             100, 561, 200, 50,
         e -> {
-            backgroundPanel.removeAll();
-            //CREATE ANOTHER METhOD THAT GOES TO A DIFFERENT DIALOGUE OPTION
-            JLabel moreCharLabel = new JLabel("More about " + characterName, SwingConstants.CENTER);
-            moreCharLabel.setBounds(200, 375, 400, 50);
-            backgroundPanel.add(moreCharLabel);
-            backgroundPanel.revalidate();
-            backgroundPanel.repaint();
+            tellmeMore();
         }
     );
     // Add "Meet a Different Character" button
@@ -119,80 +132,16 @@ class GameGUI {
     backgroundPanel.revalidate();
     backgroundPanel.repaint();
     }
+
+    private void tellmeMore() {
+        backgroundPanel.removeAll();
+            //CREATE ANOTHER METhOD THAT GOES TO A DIFFERENT DIALOGUE OPTION
+            JLabel moreCharLabel = new JLabel("More about ", SwingConstants.CENTER);
+            moreCharLabel.setBounds(200, 375, 400, 50);
+            backgroundPanel.add(moreCharLabel);
+            backgroundPanel.revalidate();
+            backgroundPanel.repaint();
+    }
 }
 
 
-/*
- *  // Add a "Start Game" button
-        customButton startButton = new customButton(
-            "Start Game", 
-            300, 375, 200, 50, 
-            e -> {
-                backgroundPanel.removeAll();
-                String greetingB = dialogue.greetingBrad();
-                JLabel label = new JLabel(greetingB, SwingConstants.CENTER); // OUTPUT
-                label.setBounds(200, 375, 400, 50);
-                backgroundPanel.add(label);
-        
-                // Add a "tellMemore" button
-                customButton tellMeMoreButton = new customButton(
-                    "Tell me more about you!", 
-                    100, 561, 200, 50, 
-                    event -> {
-                        backgroundPanel.removeAll();
-                        JLabel moreCharLabel = new JLabel("more about char", SwingConstants.CENTER);
-                        moreCharLabel.setBounds(200, 375, 400, 50);
-                        backgroundPanel.add(moreCharLabel);
-                        backgroundPanel.revalidate();
-                        backgroundPanel.repaint();
-                    }
-                );
-
-                customButton diffCharButton = new customButton(
-                    "Meet a different character", 
-                    500, 561, 200, 50, 
-                    event -> {
-                        backgroundPanel.removeAll();
-                        String greetingN = dialogue.normGreeting();
-                        JLabel newCharLabel = new JLabel(greetingN, SwingConstants.CENTER);
-                        newCharLabel.setBounds(200, 375, 400, 50);
-                        backgroundPanel.add(newCharLabel);
-                        backgroundPanel.revalidate();
-                        backgroundPanel.repaint();
-                    }
-                );
-                
-                backgroundPanel.add(tellMeMoreButton);
-                backgroundPanel.add(diffCharButton);
-
-                backgroundPanel.revalidate();
-                backgroundPanel.repaint();
-                    }
-                );
-                backgroundPanel.add(startButton);
- */
-       
-
-//IDEA: create a for loop that presents two options tell more and new char. if tell me more is pressed, it will 
-//remove all and add a new label with the new dialogue. if new char is pressed, it will remove all and add a new label with the new dialogue.
-                
-/*
- * // Add a "Quit" button
-                customButton quitButton = new customButton(
-                    "Quit", 
-                    300, 450, 200, 50, 
-                    e -> System.exit(0)
-                );
-                backgroundPanel.add(quitButton);
-
-                // Add a "Settings" button
-                customButton settingsButton = new customButton(
-                    "Settings", 
-                    300, 525, 200, 50, 
-                    e -> {
-                        // Placeholder for settings action
-                        JOptionPane.showMessageDialog(frame, "Settings are not available yet.");
-                    }
-                );
-                backgroundPanel.add(settingsButton);
- */

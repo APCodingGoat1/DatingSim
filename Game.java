@@ -19,11 +19,12 @@ public class Game {
         NPC noah = new NPC("noah", 100, "e");
         NPC steven = new NPC("steven", 100, "e");
         NPC caden = new NPC("caden", 100, "e");
+        NPC rohan = new NPC("rohan", 100, "e");
         //^^^ Create different NPCs ^^^ (TEMP FORMAT)
 
-        brad.setloveStat(75);
+        //brad.setloveStat(75);
 
-        System.out.println(brad);
+        //System.out.println(brad);
         
 
     }
