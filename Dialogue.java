@@ -4,53 +4,93 @@ public class Dialogue {
     private static final Random random = new Random();
     private final ArrayList<String[]> greetingsArr;
     private final ArrayList<String[]> tellmeMoreArr;
+    private final ArrayList<String[]> tellMeMoreOptions;
+    private final ArrayList<String[]> tellMeMoreResponses;
+    private final ArrayList<String[]> characterImages;
 
     public Dialogue() {
+        characterImages = new ArrayList<>();
+
+        // Add image paths for each character - change these paths to the correct paths after all pics are added
+        characterImages.add(new String[]{"Brad", "pics/bradpics/brad1.jpg", "pics/bradpics/brad2.jpg", "pics/bradpics/brad3.jpg"});
+        characterImages.add(new String[]{"Jasper", "pics/jasperpics/jasper1.jpg", "pics/ReeseR.jpg"});
+        characterImages.add(new String[]{"Cedar", "pics/cedarpics/cedar1.jpg", "pics/ReeseR.jpg"});
+        characterImages.add(new String[]{"BenX", "pics/ReeseR.jpg", "pics/ReeseR.jpg"});
+        characterImages.add(new String[]{"Noah", "pics/ReeseR.jpg", "pics/ReeseR.jpg"});
+        characterImages.add(new String[]{"Steven", "pics/ReeseR.jpg", "pics/ReeseR.jpg"});
+        characterImages.add(new String[]{"Caden", "pics/ReeseR.jpg", "pics/ReeseR.jpg"});
+        characterImages.add(new String[]{"Rohan", "pics/ReeseR.jpg", "pics/ReeseR.jpg"});
+
         greetingsArr = new ArrayList<>();
-        // Add greetings for each character
         greetingsArr.add(new String[]{"Brad", 
         "Hello. I am going to touch you.", 
         "huhehueh what?", 
         "heyyo", 
         "thut up hahah"});
         greetingsArr.add(new String[]{"Jasper", 
-        "Hi >.<", 
-        "hey *with rizz*", 
-        "no"});
+        "JaspHello1", 
+        "JaspHello2", 
+        "JaspHello3"});
         greetingsArr.add(new String[]{"Cedar", 
-        "hey", 
+        "CedHello1", 
         "CedHello2", 
         "CedHello3"});
         greetingsArr.add(new String[]{"BenX", 
-        "was up", 
-        "was up I am the Ben Xaiver", 
+        "BenHello1", 
+        "BenHello2", 
         "BenHello3"});
         greetingsArr.add(new String[]{"Noah",
-        "wazz up",
-        "i am going to have e sex with you",
-        "*high fives*"});
+        "NoahHello1",
+        "NoahHello2",
+        "NoahHello3"});
         greetingsArr.add(new String[]{"Steven",
         "StevenHello1",
         "StevenHello2",
         "StevenHello3"});
         greetingsArr.add(new String[]{"Caden",
-        "huh?",
+        "CadenHello1",
         "CadenHello2",
         "CadenHello3"});
         greetingsArr.add(new String[]{"Rohan",
         "RohanHello1",
-        "CadenHello2",
-        "CadenHello3"});
+        "RohanHello2",
+        "RohanHello3"});
 
         tellmeMoreArr = new ArrayList<>();
-        // Add tell me more options1 for each character
-        tellmeMoreArr.add(new String[]{"Brad", "I know you love me."});
-        tellmeMoreArr.add(new String[]{"Jasper", "tellmeMoreJ"});
-        tellmeMoreArr.add(new String[]{"Cedar", "tellmeMoreC"});
-        tellmeMoreArr.add(new String[]{"BenX", "tellmeMoreB"});
-        tellmeMoreArr.add(new String[]{"Noah", "tellmeMoreN"});
-        tellmeMoreArr.add(new String[]{"Steven", "tellmeMoreS"});
-        tellmeMoreArr.add(new String[]{"Caden", "tellmeMoreC"});
+        tellmeMoreArr.add(new String[]{"Brad", "heyyo i wike men and beadadoobee."});
+        tellmeMoreArr.add(new String[]{"Jasper", "tellMeMoreJ"});
+        tellmeMoreArr.add(new String[]{"Cedar", "tellMeMoreC"});
+        tellmeMoreArr.add(new String[]{"BenX", "tellMeMoreBX"});
+        tellmeMoreArr.add(new String[]{"Noah", "tellMeMoreN"});
+        tellmeMoreArr.add(new String[]{"Steven", "tellMeMoreS"});
+        tellmeMoreArr.add(new String[]{"Caden", "tellMeMoreC"});
+        tellmeMoreArr.add(new String[]{"Rohan", "tellMeMoreR"});
+
+        tellMeMoreOptions = new ArrayList<>();
+        tellMeMoreResponses = new ArrayList<>();
+        tellMeMoreOptions.add(new String[]{"Brad", "c-c-cool man..", "OMG Me too!!", "i like men", "touch me"});
+        tellMeMoreResponses.add(new String[]{"Brad", "What. You don't like men? DIE", "less kwiss", "GAYYYY", "*violates every orifice of your body*"});
+        
+        tellMeMoreOptions.add(new String[]{"Jasper", "tellMeMoreOption1", "tellMeMoreOption2", "tellMeMoreOption3", "tellMeMoreOption4"});
+        tellMeMoreResponses.add(new String[]{"Jasper", "tellMeMoreResponse1", "tellMeMoreResponse2", "tellMeMoreResponse3", "tellMeMoreResponse4"});
+        tellMeMoreOptions.add(new String[]{"Cedar", "tellMeMoreOption1", "tellMeMoreOption2", "tellMeMoreOption3", "tellMeMoreOption4"});
+        tellMeMoreResponses.add(new String[]{"Cedar", "tellMeMoreResponse1", "tellMeMoreResponse2", "tellMeMoreResponse3", "tellMeMoreResponse4"});
+        
+        tellMeMoreOptions.add(new String[]{"BenX", "tellMeMoreOption1", "tellMeMoreOption2", "tellMeMoreOption3", "tellMeMoreOption4"});
+        tellMeMoreResponses.add(new String[]{"BenX", "tellMeMoreResponse1", "tellMeMoreResponse2", "tellMeMoreResponse3", "tellMeMoreResponse4"});
+        
+        tellMeMoreOptions.add(new String[]{"Noah", "tellMeMoreOption1", "tellMeMoreOption2", "tellMeMoreOption3", "tellMeMoreOption4"});
+        tellMeMoreResponses.add(new String[]{"Noah", "tellMeMoreResponse1", "tellMeMoreResponse2", "tellMeMoreResponse3", "tellMeMoreResponse4"});
+        
+        tellMeMoreOptions.add(new String[]{"Steven", "tellMeMoreOption1", "tellMeMoreOption2", "tellMeMoreOption3", "tellMeMoreOption4"});
+        tellMeMoreResponses.add(new String[]{"Steven", "tellMeMoreResponse1", "tellMeMoreResponse2", "tellMeMoreResponse3", "tellMeMoreResponse4"});
+        
+        tellMeMoreOptions.add(new String[]{"Caden", "tellMeMoreOption1", "tellMeMoreOption2", "tellMeMoreOption3", "tellMeMoreOption4"});
+        tellMeMoreResponses.add(new String[]{"Caden", "tellMeMoreResponse1", "tellMeMoreResponse2", "tellMeMoreResponse3", "tellMeMoreResponse4"});
+        
+        tellMeMoreOptions.add(new String[]{"Rohan", "tellMeMoreOption1", "tellMeMoreOption2", "tellMeMoreOption3", "tellMeMoreOption4"});
+        tellMeMoreResponses.add(new String[]{"Rohan", "tellMeMoreResponse1", "tellMeMoreResponse2", "tellMeMoreResponse3", "tellMeMoreResponse4"});
+
     }
 
     // Get all characters and their greetings
@@ -68,57 +108,36 @@ public class Dialogue {
         return "No greetings available for " + characterName;
     }
 
-
-
-
-
-
-
-    /* 
-     * public String normGreeting() {
-        String[] greetings = {
-            "Hi there! It's so nice to meet you!",
-            "Hello! You look amazing today!",
-            "Hey! I've been waiting to see you!"
-        };
-        return greetings[random.nextInt(greetings.length)];
+    public ArrayList<String[]> getTellMeMoreAll() {
+        return tellmeMoreArr;
     }
 
-    public String greetingBrad() {
-        String[] greetingBrad = {
-            "Hello. I am going to touch you.",
-            "huhehueh what?",
-            "heyyo",
-            "thut up hahah"
-        };
-        return greetingBrad[random.nextInt(greetingBrad.length)];
-    }
-    
-    public String greetingJasp() {
-        String[] greetingJasp = {
-            "Hello1",
-            "Hello2",
-            "hello3",
-        };
-        return greetingJasp[random.nextInt(greetingJasp.length)];
-    }
+    public String getTellMeMoreData(String characterName) {
+        for (String[] data : tellmeMoreArr) {
+            if (data[0].equals(characterName)) {
+                return data[1]; // Return the "Tell Me More" data
+            }
+        }
+        return "No additional information available.";
 
-    public String greetingCedar() {
-        String[] greetingCedar = {
-            "Hello1",
-            "Hello2",
-            "hello3",
-        };
-        return greetingCedar[random.nextInt(greetingCedar.length)];
-    }
 
-    public String greetingBenX() {
-        String[] greetingBenX = {
-            "Hello1",
-            "Hello2",
-            "hello3",
-        };
-        return greetingBenX[random.nextInt(greetingBenX.length)];
+}
+
+public String[] getTellMeMoreOptionsLabels(int characterIndex) {
+    return tellMeMoreOptions.get(characterIndex);
+}
+public String[] getTellMeMoreResponses(int characterIndex) {
+    return tellMeMoreResponses.get(characterIndex);
+}
+
+
+public String[] getCharacterImages(String characterName) {
+    for (String[] images : characterImages) {
+        if (images[0].equals(characterName)) {
+            return images; // Return the array containing the character's name and image paths
+        }
     }
-    */
+    return new String[]{"bradpics/bradfinal.jpg"}; // Fallback image - change later?
+}
+
 }
