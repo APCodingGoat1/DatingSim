@@ -13,13 +13,13 @@ public class Dialogue {
 
         // Add image paths for each character - change these paths to the correct paths after all pics are added
         characterImages.add(new String[]{"Brad", "pics/bradpics/brad1.jpg", "pics/bradpics/brad2.jpg", "pics/bradpics/brad3.jpg"});
-        characterImages.add(new String[]{"Jasper", "pics/jasperpics/jasper1.jpg", "pics/ReeseR.jpg"});
-        characterImages.add(new String[]{"Cedar", "pics/cedarpics/cedar1.jpg", "pics/ReeseR.jpg"});
-        characterImages.add(new String[]{"BenX", "pics/ReeseR.jpg", "pics/ReeseR.jpg"});
+        characterImages.add(new String[]{"Jasper", "pics/jasperpics/jasperHap.jpg", "pics/jasperpics/jasperRizz.jpg"});
+        characterImages.add(new String[]{"Cedar", "pics/cedarpics/cedarHap.jpg", "pics/cedarpics/cedarSad.jpg"});
+        characterImages.add(new String[]{"BenX", "pics/benxpics/benxHap.jpg", "pics/benxpics/benxRizz.jpg"});
         characterImages.add(new String[]{"Noah", "pics/ReeseR.jpg", "pics/ReeseR.jpg"});
         characterImages.add(new String[]{"Steven", "pics/ReeseR.jpg", "pics/ReeseR.jpg"});
         characterImages.add(new String[]{"Caden", "pics/ReeseR.jpg", "pics/ReeseR.jpg"});
-        characterImages.add(new String[]{"Rohan", "pics/ReeseR.jpg", "pics/ReeseR.jpg"});
+        characterImages.add(new String[]{"Rohan", "pics/rohanpics/rohanHap.jpg", "pics/rohanpics/rohanRizz.jpg"});
 
         greetingsArr = new ArrayList<>();
         greetingsArr.add(new String[]{"Brad", 

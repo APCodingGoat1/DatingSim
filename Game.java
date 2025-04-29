@@ -22,7 +22,7 @@ public class Game {
         NPC rohan = new NPC("rohan", 100, "e");
         //^^^ Create different NPCs ^^^ (TEMP FORMAT)
 
-        brad.setloveStat(75);
+        //brad.setloveStat(75);
 
         //System.out.println(brad);
         
