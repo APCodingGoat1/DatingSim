@@ -1,11 +1,19 @@
 import java.awt.*;
 import javax.swing.*;
 
+/**
+ * The GameGUI class represents the graphical user interface for the dating simulation game.
+ * It manages the main game window, character interactions, and user input.
+ */
+
 class GameGUI {
     private JFrame frame;
     private JPanel backgroundPanel;
     private Dialogue dialogue;
     private int currentCharacterIndex;
+    private java.util.List<NPC> characters = new java.util.ArrayList<>(); // List of characters
+    private java.util.List<Integer> availableIndices = new java.util.ArrayList<>();
+
 
 
     private void displayImage(String imagePath) {
@@ -29,6 +37,21 @@ class GameGUI {
 
 
     public GameGUI() {
+        characters.add(new NPC("Brad", 25));
+        characters.add(new NPC("Jasper", 50));
+        characters.add(new NPC("Cedar", 25));
+        characters.add(new NPC("BenX", 25));
+        characters.add(new NPC("Noah", 50));
+        characters.add(new NPC("Steven", 25));
+        characters.add(new NPC("Caden", 25));
+        characters.add(new NPC("Rohan", 25));
+
+           // Initialize the list of available indices
+        for (int i = 0; i < characters.size(); i++) {
+        availableIndices.add(i);
+        }
+
+        
         // Initialize the JFrame
         frame = new JFrame("UwU Syntax Error Love Overflow UwU");
         frame.setSize(800, 800);  // Set the size of the window
@@ -63,8 +86,8 @@ class GameGUI {
         dialogue = new Dialogue();
 
         //Center the button (800 - x)/2 
-
-        currentCharacterIndex = (int) (Math.random() * dialogue.getGreetingsAll().size()); // Randomly select a character
+        
+        
         customButton startButton = new customButton(
             "Start Game", 300, 375, 200, 50,
         e -> updateCharacterOptions()
@@ -80,17 +103,7 @@ class GameGUI {
         e -> System.exit(0)
     );
     backgroundPanel.add(quitButton);
-
-    // Add a "Settings" button
-    customButton settingsButton = new customButton(
-        "Settings", 
-        300, 525, 200, 50, 
-        e -> {
-            // Placeholder for settings action
-            JOptionPane.showMessageDialog(frame, "Settings are not available yet.");
-        }
-    );
-    backgroundPanel.add(settingsButton);
+    
 
         // Set the window to be visible
         frame.setVisible(true);
@@ -98,8 +111,35 @@ class GameGUI {
 
 
     private void updateCharacterOptions() {
+
+        if (availableIndices.isEmpty()) {
+        // Reset the list with all indices
+        for (int i = 0; i < characters.size(); i++) {
+            availableIndices.add(i);
+        }
+        System.out.println("All characters have been shown. Resetting the list.");
+    }
+
+        int randomIndex = (int) (Math.random() * availableIndices.size());
+        currentCharacterIndex = availableIndices.get(randomIndex);
+        availableIndices.remove(randomIndex); // Remove the index to avoid repetition
+
+        // Debugging output
+        System.out.println("Randomly selected character index: " + currentCharacterIndex);
+        System.out.println("Remaining indices: " + availableIndices);
+
+
+        //currentCharacterIndex = (int) (Math.random() * characters.size());
+        //System.out.println("Current Character Index: " + currentCharacterIndex); // Debugging line
+        NPC currentCharacter = characters.get(currentCharacterIndex);
+        System.out.println("Current Character: " + currentCharacter.getName());
+
+        if (currentCharacterIndex >= characters.size()) {
+            currentCharacterIndex = 0; // Reset to the first character
+        }
+
         // Check if there are any characters left to display
-        if (currentCharacterIndex >= dialogue.getGreetingsAll().size() - 1) {
+        if (currentCharacterIndex >= availableIndices.size() - 1) {
             // If all characters have been shown, display a message or reset
             backgroundPanel.removeAll();
             JLabel endLabel = new JLabel("No more characters to meet!", SwingConstants.CENTER);
@@ -111,7 +151,11 @@ class GameGUI {
                 "Restart",
                 300, 450, 200, 50,
                 e -> {
-                    currentCharacterIndex = -1; // Reset the character index
+                    availableIndices.clear();
+                    for (int i = 0; i < characters.size(); i++) {
+                        availableIndices.add(i);
+                    }
+                    //currentCharacterIndex = -1; // Reset the character index
                     updateCharacterOptions(); // Restart the process
                 }
             );
@@ -121,7 +165,7 @@ class GameGUI {
             backgroundPanel.repaint();
             return;
         }
-        currentCharacterIndex++;
+        //currentCharacterIndex++;
 
         // Get the current character's data
         String[] UIgreetings = dialogue.getGreetingsAll().get(currentCharacterIndex);
@@ -195,10 +239,17 @@ class GameGUI {
         String[] options = dialogue.getTellMeMoreOptionsLabels(currentCharacterIndex); // Array of button labels
         String[] responses = dialogue.getTellMeMoreResponses(currentCharacterIndex); // Array of responses
 
+
+        NPC currentCharacter = characters.get(currentCharacterIndex);
+
+        //MINUES 10 NEGATIVE OPTION
         customButton option1 = new customButton(
         options[1],
         150, 550, 200, 50,
         e -> {
+            currentCharacter.decloveStat(10); // Decrease love stat by 10
+            System.out.println(currentCharacter.getName() + "'s love stat: " + currentCharacter.getloveStat() + "\nRelationship: " + currentCharacter.getRelationship());
+
             backgroundPanel.removeAll();
             JLabel response1Label = new JLabel(responses[1], SwingConstants.CENTER);
             response1Label.setBounds(200, 425, 400, 50);
@@ -207,11 +258,14 @@ class GameGUI {
             backgroundPanel.repaint();
         }
     );
-
+        //MINUS 5 NEGATIVE OPTION
         customButton option2 = new customButton(
         options[2],
         450, 550, 200, 50,
         e -> {
+            currentCharacter.decloveStat(5); // Decrease love stat by 10
+            System.out.println(currentCharacter.getName() + "'s love stat: " + currentCharacter.getloveStat() + "\nRelationship: " + currentCharacter.getRelationship());
+
             backgroundPanel.removeAll();
             JLabel response2Label = new JLabel(responses[2], SwingConstants.CENTER);
             response2Label.setBounds(200, 375, 400, 50);
@@ -220,12 +274,15 @@ class GameGUI {
             backgroundPanel.repaint();
         }
     );
-
+        //PLUS 10 POSTIVE OPTION
         customButton option3 = new customButton(
         options[3],
         150, 650, 200, 50,
         e -> {
             backgroundPanel.removeAll();
+            currentCharacter.incloveStat(10); // Decrease love stat by 10
+            System.out.println(currentCharacter.getName() + "'s love stat: " + currentCharacter.getloveStat() + "\nRelationship: " + currentCharacter.getRelationship());
+
             JLabel response3Label = new JLabel(responses[3], SwingConstants.CENTER);
             response3Label.setBounds(200, 375, 400, 50);
             backgroundPanel.add(response3Label);
@@ -233,11 +290,14 @@ class GameGUI {
             backgroundPanel.repaint();
         }
     );
-
+        //PLUS 5 POSITIVE OPTION
         customButton option4 = new customButton(
         options[4],
         450, 650, 200, 50,
         e -> {
+            currentCharacter.incloveStat(5); // Decrease love stat by 10
+            System.out.println(currentCharacter.getName() + "'s love stat: " + currentCharacter.getloveStat() + "\nRelationship: " + currentCharacter.getRelationship());
+
             backgroundPanel.removeAll();
             JLabel response4Label = new JLabel(responses[4], SwingConstants.CENTER);
             response4Label.setBounds(200, 375, 400, 50);

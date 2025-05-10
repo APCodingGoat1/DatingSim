@@ -13,7 +13,7 @@ public class Dialogue {
 
         // Add image paths for each character - change these paths to the correct paths after all pics are added
         characterImages.add(new String[]{"Brad", "pics/bradpics/brad1.jpg", "pics/bradpics/brad2.jpg", "pics/bradpics/brad3.jpg"});
-        characterImages.add(new String[]{"Jasper", "pics/jasperpics/jasperHap.jpg", "pics/jasperpics/jasperRizz.jpg"});
+        characterImages.add(new String[]{"Jasper", "pics/jasperpics/jasper1.jpg", "pics/jasperpics/jasperRizz.jpg"});
         characterImages.add(new String[]{"Cedar", "pics/bradpics/cedarHap.jpg", "pics/bradpics/cedarSad.jpg"});
         characterImages.add(new String[]{"BenX", "pics/benxpics/benxHap.jpg", "pics/benxpics/benxRizz.jpg"});
         characterImages.add(new String[]{"Noah", "pics/ReeseR.jpg", "pics/ReeseR.jpg"});
@@ -28,15 +28,15 @@ public class Dialogue {
         "heyyo", 
         "thut up hahah"});
         greetingsArr.add(new String[]{"Jasper", 
-        "JaspHello1", 
-        "JaspHello2", 
-        "JaspHello3"});
+        "hi man", 
+        "im gooning it", 
+        "waz up bbg"});
         greetingsArr.add(new String[]{"Cedar", 
         "CedHello1", 
         "CedHello2", 
         "CedHello3"});
         greetingsArr.add(new String[]{"BenX", 
-        "BenHello1", 
+        "was up", 
         "BenHello2", 
         "BenHello3"});
         greetingsArr.add(new String[]{"Noah",
@@ -73,6 +73,7 @@ public class Dialogue {
         
         tellMeMoreOptions.add(new String[]{"Jasper", "tellMeMoreOption1", "tellMeMoreOption2", "tellMeMoreOption3", "tellMeMoreOption4"});
         tellMeMoreResponses.add(new String[]{"Jasper", "tellMeMoreResponse1", "tellMeMoreResponse2", "tellMeMoreResponse3", "tellMeMoreResponse4"});
+        
         tellMeMoreOptions.add(new String[]{"Cedar", "tellMeMoreOption1", "tellMeMoreOption2", "tellMeMoreOption3", "tellMeMoreOption4"});
         tellMeMoreResponses.add(new String[]{"Cedar", "tellMeMoreResponse1", "tellMeMoreResponse2", "tellMeMoreResponse3", "tellMeMoreResponse4"});
         

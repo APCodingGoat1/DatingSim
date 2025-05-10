@@ -1,29 +1,29 @@
 public class NPC {
     static String name;
     int loveStat = 0;
-    String personality;
     String relation; //changes relative to the loveStat num 
 
-    public NPC(String name, int loveStat, String personality) {
+    public NPC(String name, int loveStat) {
         this.name = name;
         this.loveStat = loveStat;
-        this.personality = personality;
         this.relation = "neutral";
         updateRelation();
     }
 
-    public static String getName(){
+    public String getName(){
         return name;
-    }
-    private void setName(String name){
-        this.name = name;
     }
 
     public int getloveStat(){
         return loveStat;
     }
-    public void setloveStat(int loveStat){
-        this.loveStat = loveStat;
+    public void decloveStat(int amount){
+        loveStat -= amount;
+        updateRelation();
+    }
+
+    public void incloveStat(int amount){
+        loveStat += amount;
         updateRelation();
     }
 
@@ -32,23 +32,17 @@ public class NPC {
             relation = "In love";
         } else if (loveStat >= 50) {
             relation = "friends";
-        } else {
+        } else if (loveStat >= 25) {
             relation = "neutral";
+        } else if (loveStat >= 0) {
+            relation = "enemy";
+        } else {
+            relation = "hate";
         }
-    }
-
-    public String getPersonality(){
-        return personality;
-    }
-    private void setPersonality(String personality){
-        this.personality = personality;
     }
 
     public String getRelationship(){
         return relation;
-    }
-    private void setRelation(String relation){
-        this.relation = relation;
     }
 
 
