@@ -1,10 +1,7 @@
 import java.awt.*;
 import javax.swing.*;
 
-/**
- * The GameGUI class represents the graphical user interface for the dating simulation game.
- * It manages the main game window, character interactions, and user input.
- */
+
 
 class GameGUI {
     private JFrame frame;
@@ -14,8 +11,11 @@ class GameGUI {
     private java.util.List<NPC> characters = new java.util.ArrayList<>(); // List of characters
     private java.util.List<Integer> availableIndices = new java.util.ArrayList<>();
 
-
-
+    /**
+     * Displays an image in the background panel.
+     * 
+     * @param imagePath The path to the image file to be displayed.
+     */
     private void displayImage(String imagePath) {
         // Clear the panel
         backgroundPanel.removeAll();
@@ -35,7 +35,9 @@ class GameGUI {
         backgroundPanel.repaint();
     }
 
-
+    /**
+     * Constructs the GameGUI and initializes the game window and components.
+     */
     public GameGUI() {
         characters.add(new NPC("Brad", 25));
         characters.add(new NPC("Jasper", 50));
@@ -109,7 +111,10 @@ class GameGUI {
         frame.setVisible(true);
     }
 
-
+    /**
+     * Updates the game to display the next character's options.
+     * If all characters have been shown, it resets the list of available characters.
+     */
     private void updateCharacterOptions() {
 
         if (availableIndices.isEmpty()) {
@@ -213,7 +218,9 @@ class GameGUI {
     }
 
 
-
+    /**
+     * Displays additional information about the current character.
+     */
     private void tellMeMoreButton() {
         String[] UItellmeMore = dialogue.getTellMeMoreAll().get(currentCharacterIndex);
         String characterName = UItellmeMore[0];
@@ -317,11 +324,6 @@ class GameGUI {
         backgroundPanel.revalidate();
         backgroundPanel.repaint();
     }
-
-
-
-
-
 
 
 }

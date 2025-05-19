@@ -1,5 +1,11 @@
 import java.util.ArrayList;
 import java.util.Random;
+
+/**
+ * The Dialogue class manages all dialogue-related data for the dating simulation game.
+ * It provides methods to retrieve greetings, "Tell Me More" data, options, responses, 
+ * and character images for each NPC.
+ */
 public class Dialogue {
     private static final Random random = new Random();
     private final ArrayList<String[]> greetingsArr;
@@ -8,13 +14,17 @@ public class Dialogue {
     private final ArrayList<String[]> tellMeMoreResponses;
     private final ArrayList<String[]> characterImages;
 
+    /**
+     * Constructs a Dialogue object and initializes all dialogue-related data, 
+     * including greetings, "Tell Me More" data, options, responses, and character images.
+     */
     public Dialogue() {
         characterImages = new ArrayList<>();
 
         // Add image paths for each character - change these paths to the correct paths after all pics are added
         characterImages.add(new String[]{"Brad", "pics/bradpics/brad1.jpg", "pics/bradpics/brad2.jpg", "pics/bradpics/brad3.jpg"});
         characterImages.add(new String[]{"Jasper", "pics/jasperpics/jasper1.jpg", "pics/jasperpics/jasperRizz.jpg"});
-        characterImages.add(new String[]{"Cedar", "pics/bradpics/cedarHap.jpg", "pics/bradpics/cedarSad.jpg"});
+        characterImages.add(new String[]{"Cedar", "pics/ReeseR.jpg", "pics/ReeseR.jpg"});
         characterImages.add(new String[]{"BenX", "pics/benxpics/benxHap.jpg", "pics/benxpics/benxRizz.jpg"});
         characterImages.add(new String[]{"Noah", "pics/ReeseR.jpg", "pics/ReeseR.jpg"});
         characterImages.add(new String[]{"Steven", "pics/ReeseR.jpg", "pics/ReeseR.jpg"});
@@ -94,12 +104,21 @@ public class Dialogue {
 
     }
 
-    // Get all characters and their greetings
+     /**
+     * Retrieves all greetings for all characters.
+     * 
+     * @return An ArrayList of String arrays, where each array contains a character's name and their "Tell Me More" data.
+     */
     public ArrayList<String[]> getGreetingsAll() {
         return greetingsArr;
     }
 
-    // Get a random greeting for a specific character
+    /**
+     * Retrieves a random greeting for a specific character.
+     *
+     * @param characterName The name of the character.
+     * @return A random greeting for the specified character, or a default message if no greetings are available.
+     */
     public String getRandomGreeting(String characterName) {
         for (String[] g : greetingsArr) {
             if (g[0].equalsIgnoreCase(characterName)) {
@@ -109,10 +128,21 @@ public class Dialogue {
         return "No greetings available for " + characterName;
     }
 
+    /**
+     * Retrieves all "Tell Me More" data for all characters.
+     *
+     * @return An ArrayList of String arrays, where each array contains a character's name and their "Tell Me More" data.
+     */
     public ArrayList<String[]> getTellMeMoreAll() {
         return tellmeMoreArr;
     }
 
+    /**
+     * Retrieves the "Tell Me More" data for a specific character.
+     *
+     * @param characterName The name of the character.
+     * @return The "Tell Me More" data for the specified character, or a default message if no data is available.
+     */
     public String getTellMeMoreData(String characterName) {
         for (String[] data : tellmeMoreArr) {
             if (data[0].equals(characterName)) {
@@ -120,18 +150,33 @@ public class Dialogue {
             }
         }
         return "No additional information available.";
+    }
 
-
-}
-
+    /**
+     * Retrieves the labels for the "Tell Me More" options for a specific character.
+     *
+     * @param characterIndex The index of the character in the list.
+     * @return An array of option labels for the specified character.
+     */
 public String[] getTellMeMoreOptionsLabels(int characterIndex) {
     return tellMeMoreOptions.get(characterIndex);
 }
+    /**
+     * Retrieves the responses for the "Tell Me More" options for a specific character.
+     * 
+     * @param characterIndex The index of the character in the list.
+     * @return An array of responses for the specified character.
+     */
 public String[] getTellMeMoreResponses(int characterIndex) {
     return tellMeMoreResponses.get(characterIndex);
 }
 
-
+    /**
+     * Retrieves the image paths for a specific character.
+     * 
+     *  @param characterName The name of the character.
+     * @return An array containing the character's name and image paths, or a fallback image if no images are found.
+     */
 public String[] getCharacterImages(String characterName) {
     for (String[] images : characterImages) {
         if (images[0].equals(characterName)) {

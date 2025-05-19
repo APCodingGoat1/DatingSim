@@ -1,5 +1,17 @@
 
+/**
+ * The Game class serves as the entry point for the dating simulation game.
+ * It initializes the game by creating a new instance of the GameGUI, which handles
+ * the graphical user interface and game logic.
+ */
 public class Game {
+
+    /**
+     * The main method is the entry point of the application.
+     * It initializes the game by creating a new GameGUI instance.
+     *
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         new GameGUI();
 
