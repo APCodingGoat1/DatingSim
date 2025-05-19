@@ -88,4 +88,8 @@ My game runs realistic relationships with characters
 
 ## Author Info
 
+<<<<<<< HEAD
 Nathan Diep. Creating even a very simple game(like this one) takes lots of thinking. Also, experimenting with a java GUI was fun
+=======
+Nathan Diep. Creating even a very simple game(like this one) takes lots of thinking. Also, experimenting with a java GUI was fun
+>>>>>>> 65bb11477d28d376b691cd19ca3a0a77d0b56b7b
